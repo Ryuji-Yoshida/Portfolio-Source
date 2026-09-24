@@ -1,67 +1,12 @@
-# 11ty + Vite Development Template
+# フロントエンド・ポートフォリオ（ソースコード）
 
-11ty（Eleventy）とViteを組み合わせた、高速な静的サイト制作のためのスターターテンプレートです。
+本リポジトリは、フロントエンド開発におけるコンポーネント設計、環境構築、
+および実装品質を確認いただくためのポートフォリオ用ソースコードです。
 
-### ◆特徴
+## 🛠 技術スタック・開発環境
 
-* **高速ビルド & HMR**: Viteによる快適なローカル開発環境
-* **SSG**: 11ty（Eleventy）を利用したテンプレートエンジンの管理
-* **コード品質管理**: ESLint, Stylelint, Prettier による自動整頓
-* **パッケージ管理**: pnpm (pnpm-workspace)
-
-### ◆ディレクトリ構成
-
-```text
-.
-├── scripts/              # カスタムビルド・クリーンアップ用スクリプト
-│   ├── clean-dist.mjs
-│   └── remove-empty-dirs.mjs
-├── src/                  # ソースファイル
-│   ├── _data/           # 11ty グローバルデータファイル
-│   ├── _templates/      # レイアウト・パーツテンプレート
-│   ├── assets/          # CSS/SCSS, 画像等
-│   ├── public/          # 静的ファイル (js等)
-│   └── page.ejs         # ページテンプレート
-├── .eleventy.js         # 11ty 設定ファイル
-├── vite.config.js       # Vite 設定ファイル
-├── eslint.config.js     # ESLint 設定ファイル
-├── .stylelintrc.json    # Stylelint 設定ファイル
-└── .prettierrc          # Prettier 設定ファイル
-
-```
-
-### ◆セットアップ & 使い方
-
-##### 1. 依存関係のインストール
-```bash
-pnpm install
-```
-##### 2. 開発用サーバーの起動
-```bash
-pnpm dev
-```
-##### 3. ビルド
-```bash
-pnpm build
-```
-##### 4. プレビュー & コードチェック
-###### ビルド結果（dist）のプレビュー表示
-```bash
-pnpm preview
-```
-###### コードチェック (ESLint & Stylelint)
-```bash
-pnpm lint
-```
-###### コード自動整形 (Prettier)
-```bash
-pnpm format
-```
-
-### ◆開発ステータス
-現在このプロジェクトは初期調整中（WIP）です。
-基本機能の動作確認は完了していますが、必要に応じて設定や構成の微調整を行っています。
-
-### ◆ライセンス
-##### MIT
-本リポジトリは自由に使用・改変していただけます。（必要に応じてライセンス名をご記述ください）
+- **言語・ライブラリ:** HTML (EJS) / JS
+- **ビルドツール:** Vite / Eleventy
+- **スタイル:** SCSS (Sass)
+- **コード品質・規約:** ESLint, Stylelint, Prettier
+- **パッケージマネージャー:** pnpm
