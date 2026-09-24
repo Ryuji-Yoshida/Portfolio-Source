@@ -1,4 +1,5 @@
 // animation.js
+import { htmlTag, win } from './constants';
 import { refreshLenis } from './lenis';
 
 export default function animation() {
@@ -6,7 +7,6 @@ export default function animation() {
 
   // ファーストビュー/初回イントロ
   const visit = sessionStorage.getItem('visit');
-
   if (visit === null) {
     html.classList.add('is-init');
 
@@ -17,18 +17,18 @@ export default function animation() {
         html.classList.add('is-anime');
         sessionStorage.setItem('visit', 'true');
         refreshLenis();
-        logoCls1.removeEventListener('animationend', handleLogoEnd);
       };
       logoCls1.addEventListener('animationend', handleLogoEnd);
+      logoCls1.addEventListener('webkitAnimationEnd', handleLogoEnd);
     }
 
     const header = document.querySelector('.header--site');
     if (header) {
       const handleHeaderEnd = () => {
         html.classList.remove('is-anime');
-        header.removeEventListener('transitionend', handleHeaderEnd);
       };
       header.addEventListener('transitionend', handleHeaderEnd);
+      header.addEventListener('webkitTransitionEnd', handleHeaderEnd);
     }
   } else if (visit) {
     html.classList.add('is-visit');
@@ -38,21 +38,18 @@ export default function animation() {
     window.lenis?.start();
   }
 
-  // スクロールアニメーション（IntersectionObserverで発火）
-  const animeTargets = document.querySelectorAll('[data-js-anime="sec"]');
-  if (animeTargets.length > 0) {
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-anime');
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: '0px 0px -20% 0px', }
-    );
+  // スクロールアニメーション
+  window.addEventListener('scroll', () => {
+    const elem = '[data-js-anime="sec"]';
+    const pos = window.scrollY || document.documentElement.scrollTop;
+    const winH = window.innerHeight;
 
-    animeTargets.forEach((target) => observer.observe(target));
-  }
+    document.querySelectorAll(elem).forEach((target) => {
+      const offset = target.getBoundingClientRect().top + pos;
+      const animeStart = pos + winH / 1.2 > offset;
+      if (animeStart) {
+        target.classList.add('is-anime');
+      }
+    });
+  });
 }

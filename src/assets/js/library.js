@@ -21,13 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   window.lenis = lenis;
 
-  // Lenis と GSAP ScrollTrigger の同期
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-  gsap.ticker.lagSmoothing(0, 0);
-
   function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);

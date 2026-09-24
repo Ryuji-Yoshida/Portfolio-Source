@@ -1,95 +1,101 @@
 // common.js
-import { gsap } from 'gsap';
+import { click } from './constants';
 
 export default function common() {
-  const headerElem = document.querySelector('[data-js-elem="header"]');
-  const trigger = document.querySelector('[data-js-trigger="gnav"]');
-
   // グローバルナビ
-  if (trigger && headerElem) {
-    // メニュー開閉（イベント委任）
-    document.addEventListener('click', (e) => {
-      const menuBtn = e.target.closest('[data-js-trigger="menu"]');
-      if (!menuBtn) return;
+  const elem = '[data-js-elem="header"]';
+  const trigger = '[data-js-trigger="gnav"]';
+  const menu = '[data-js-trigger="menu"]';
 
-      if (!headerElem.classList.contains('is-active')) {
-        headerElem.classList.add('is-active');
-      } else {
-        headerElem.classList.remove('is-active');
+  if (document.querySelectorAll(trigger).length) {
+    // メニュー開閉
+    document.addEventListener(click, (e) => {
+      const openTarget = e.target.closest(`[data-js-elem="header"]:not(.is-active) ${menu}`);
+      if (openTarget) {
+        document.querySelectorAll(elem).forEach((el) => el.classList.add('is-active'));
+      }
+
+      const closeTarget = e.target.closest(`.is-active[data-js-elem="header"] ${menu}`);
+      if (closeTarget) {
+        document.querySelectorAll(elem).forEach((el) => el.classList.remove('is-active'));
       }
     });
 
-    // スムーススクロール関数
-    const scrollToTarget = (href) => {
-      const target = href === '#' || href === '' ? 'html' : href;
-      if (window.lenis) {
-        window.lenis.scrollTo(target, { duration: 1.2 });
-      } else {
-        gsap.to(window, { duration: 0.4, scrollTo: target, ease: 'power2.out' });
-      }
-    };
+    // スムーススクロール（Gnav）
+    window.addEventListener('load', () => {
+      document.addEventListener(click, (e) => {
+        const triggerEl = e.target.closest(trigger);
+        if (!triggerEl) return;
 
-    // Gnav トリガー
-    document.addEventListener('click', (e) => {
-      const gnavLink = e.target.closest('[data-js-trigger="gnav"]');
-      if (!gnavLink) return;
+        e.preventDefault();
+        const href = triggerEl.getAttribute('href');
+        const target = (href === '#' || href === '') ? document.documentElement : document.querySelector(href);
+        if (!target) return;
 
-      e.preventDefault();
-      const href = gnavLink.getAttribute('href');
-      scrollToTarget(href);
+        const pos = target.getBoundingClientRect().top + window.scrollY;
+
+        // GSAP ScrollToPlugin が使える場合はアニメーション処理（元の $.animate 相当）
+        if (window.gsap) {
+          window.gsap.to(window, { duration: 0.4, scrollTo: pos, ease: 'power1.inOut' });
+        } else {
+          window.scrollTo({ top: pos, behavior: 'smooth' });
+        }
+      });
     });
 
-    // ヘッダーの縮小・アクティブ解除（Lenisのスクロールイベント利用）
-    const handleScroll = () => {
-      const currentPos = window.scrollY || document.documentElement.scrollTop;
-
-      if (currentPos > 200) {
-        headerElem.classList.add('is-small');
-      } else {
-        headerElem.classList.remove('is-small');
-      }
-
-      if (headerElem.classList.contains('is-active')) {
-        headerElem.classList.remove('is-active');
-      }
+    // ヘッダー縮小・アクティブ解除
+    const handleHeaderScroll = () => {
+      const thisPos = window.scrollY || document.documentElement.scrollTop;
+      document.querySelectorAll(elem).forEach((el) => {
+        if (thisPos > 200) {
+          el.classList.add('is-small');
+        } else {
+          el.classList.remove('is-small');
+        }
+        if (el.classList.contains('is-active')) {
+          el.classList.remove('is-active');
+        }
+      });
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('load', handleHeaderScroll);
+    window.addEventListener('scroll', handleHeaderScroll);
   }
 
-  // 汎用アンカーリンク
-  document.addEventListener('click', (e) => {
-    const anchor = e.target.closest('[data-js-trigger="anchor"]');
-    if (!anchor) return;
+  // アンカーリンク
+  const anchorTrigger = '[data-js-trigger="anchor"]';
+  document.addEventListener(click, (e) => {
+    const anchorEl = e.target.closest(anchorTrigger);
+    if (!anchorEl) return;
 
     e.preventDefault();
-    const href = anchor.getAttribute('href');
-    const target = href === '#' || href === '' ? 'html' : href;
+    const href = anchorEl.getAttribute('href');
+    const target = (href === '#' || href === '') ? document.documentElement : document.querySelector(href);
+    if (!target) return;
 
-    if (window.lenis) {
-      window.lenis.scrollTo(target, { duration: 1.2 });
+    const position = target.getBoundingClientRect().top + window.scrollY;
+
+    if (window.gsap) {
+      window.gsap.to(window, { duration: 0.4, scrollTo: position, ease: 'power1.inOut' });
     } else {
-      gsap.to(window, { duration: 0.4, scrollTo: target, ease: 'power2.out' });
+      window.scrollTo({ top: position, behavior: 'smooth' });
     }
   });
 
-  // 追従メニュー処理
-  const floatMenu = document.querySelector('[data-js-elem="floatmenu"]');
-  const footer = document.querySelector('.footer--site');
+  // 追従メニュー（元の計算ロジックそのまますげ替え）
+  window.addEventListener('scroll', () => {
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollPosition = window.innerHeight + (window.scrollY || document.documentElement.scrollTop);
+    const footer = document.querySelector('.footer--site');
+    const footerHeight = footer ? footer.offsetHeight : 0;
 
-  if (floatMenu && footer) {
-    const checkFloatMenu = () => {
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollPosition = window.innerHeight + window.scrollY;
-      const footerHeight = footer.offsetHeight || 0;
+    const floatMenu = document.querySelector('[data-js-elem="floatmenu"]');
+    if (!floatMenu) return;
 
-      if (documentHeight - scrollPosition <= footerHeight) {
-        floatMenu.classList.add('is-stop');
-      } else {
-        floatMenu.classList.remove('is-stop');
-      }
-    };
-
-    window.addEventListener('scroll', checkFloatMenu, { passive: true });
-  }
+    if (documentHeight - scrollPosition <= footerHeight) {
+      floatMenu.classList.add('is-stop');
+    } else {
+      floatMenu.classList.remove('is-stop');
+    }
+  });
 }
