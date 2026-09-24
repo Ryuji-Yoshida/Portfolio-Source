@@ -30,7 +30,9 @@ const createImageTagHelpers = (assetBasePath = '/') => ({
   },
 
   imgTag(imgPath, width, height, options = '') {
-    const normalizedOptions = typeof options === 'object' ? options : { alt: options };
+    const normalizedOptions = typeof options === 'object'
+      ? options
+      : { alt: options };
     const {
       alt = '',
       className = '',

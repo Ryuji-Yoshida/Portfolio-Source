@@ -1,0 +1,55 @@
+/////////////////////////////////////
+//	Config
+/////////////////////////////////////
+@use "../setting/_index" as v;
+@use "sass:color";
+/************************************
+  Root
+************************************/
+:root {
+  // Font
+  --font-size-sp: #{v.$fs-base-sp};
+  --font-size-pc: #{v.$fs-base-pc};
+  --font-family-note: #{v.$ff-noto};
+  --font-family-josefin: #{v.$ff-josefin};
+
+  // Color
+  // Base
+  --color-blue: #{v.$c-blue};
+  --color-white: #{v.$c-white};
+  --color-black: #{v.$c-black};
+  --color-gray: #{v.$c-gray};
+
+  // Rgb
+  --color-rgb-blue:
+    #{color.channel(v.$c-blue, "red", $space: rgb)},
+    #{color.channel(v.$c-blue, "green", $space: rgb)},
+    #{color.channel(v.$c-blue, "blue", $space: rgb)};
+  --color-rgb-white:
+    #{color.channel(v.$c-white, "red", $space: rgb)},
+    #{color.channel(v.$c-white, "green", $space: rgb)},
+    #{color.channel(v.$c-white, "blue", $space: rgb)};
+  --color-rgb-black:
+    #{color.channel(v.$c-black, "red", $space: rgb)},
+    #{color.channel(v.$c-black, "green", $space: rgb)},
+    #{color.channel(v.$c-black, "blue", $space: rgb)};
+  --color-rgb-gray:
+    #{color.channel(v.$c-gray, "red", $space: rgb)},
+    #{color.channel(v.$c-gray, "green", $space: rgb)},
+    #{color.channel(v.$c-gray, "blue", $space: rgb)};
+
+  // Text
+  --color-text: var(--color-black);
+  --color-text-primary: var(--color-blue);
+  --color-text-light: var(--color-white);
+
+  // BackGround
+  --color-background: var(--color-white);
+  --color-background-primary: var(--color-blue);
+  --color-background-dark: var(--color-gray);
+
+  // Border
+  --color-border: var(--color-gray);
+  --color-border-primary: var(--color-blue);
+  --color-border-light: var(--color-white);
+}

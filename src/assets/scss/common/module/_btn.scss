@@ -1,0 +1,64 @@
+@charset "utf-8";
+/////////////////////////////////////
+//	Config
+/////////////////////////////////////
+@use "sass:math";
+@use "../../setting/_index" as v;
+/****** ボタン ******/
+.linkbtn {
+  &__item {
+    background: linear-gradient(0deg, rgba(var( --color-rgb-blue), .8) 0%, rgba(var( --color-rgb-blue), 1) 100%);
+    color: var(--color-text-light);
+    display: block;
+    min-width: 2.4rem;
+    padding: .15rem .2rem;
+    position: relative;
+    text-align: center;
+    @include v.mq(land) {
+      min-width: min(3.2rem, 320px);
+      padding: min(.1rem, 10px) min(.2rem, 20px);
+      transition: all .6s;
+    }
+    &-label {
+      font-size: .32rem;
+      font-weight: 700;
+      @include v.mq(land) {
+        font-size: min(.24rem, 24px);
+      }
+    }
+    &::before,
+    &::after{
+      @include v.mq(land) {
+        background-color: var(--color-background-primary);;
+        content:'';
+        height: 2px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: all .6s;
+        width: 0;
+      }
+    }
+    &::after{
+      @include v.mq(land) {
+        right: inherit;
+        top: inherit;
+        left: 0;
+        bottom: 0;
+      }
+    }
+    &:hover {
+      @include v.mq(land) {
+        background: transparent;
+        color: var(--color-text-primary);
+      }
+      &::before,
+      &::after {
+        @include v.mq(land) {
+          transition: all .8s;
+          width:100%;
+        }
+      }
+    }
+  }
+}

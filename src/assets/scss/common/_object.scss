@@ -1,0 +1,171 @@
+@charset "utf-8";
+/////////////////////////////////////
+//	Config
+/////////////////////////////////////
+@use "sass:math";
+@use "../setting/_index" as v;
+/************************************
+	Object
+************************************/
+/****** 表示 ******/
+@include v.mq(sp) {
+	.hide-sp {
+		display: none;
+	}
+}
+@include v.mq(land) {
+	.hide-tb {
+		display: none;
+	}
+}
+@include v.mq(land) {
+	.hide-pc {
+		display: none;
+	}
+}
+/*----- 位置 -----*/
+.ta {
+	&-l {
+		text-align: left !important;
+		&-pc {
+			@include v.mq(land) {
+				text-align: left !important;
+			}
+		}
+	}
+	&-c {
+		text-align: center !important;
+		&-pc {
+			@include v.mq(land) {
+				text-align: center !important;
+			}
+		}
+	}
+	&-r {
+		text-align: right !important;
+		&-pc {
+			@include v.mq(land) {
+				text-align: right !important;
+			}
+		}
+	}
+}
+/****** 余白 ******/
+/*----- margin -----*/
+.mg {
+	&-0 {
+		margin: 0 !important;
+	}
+	&-b-0 {
+		margin-bottom: 0 !important;
+	}
+	&-b-10 {
+		margin-bottom: .1rem;
+		@include v.mq(land) {
+			margin-bottom: min(.1rem, 10px);
+		}
+	}
+	&-b-20 {
+		margin-bottom: .2rem;
+		@include v.mq(land) {
+			margin-bottom: min(.2rem, 20px);
+		}
+	}
+	&-b-30 {
+		margin-bottom: .3rem;
+		@include v.mq(land) {
+			margin-bottom: min(.3rem, 30px);
+		}
+	}
+	&-b-40 {
+		margin-bottom: .4rem;
+		@include v.mq(land) {
+			margin-bottom: min(.4rem, 40px);
+		}
+	}
+	&-t-10 {
+		margin-top: .1rem;
+		@include v.mq(land) {
+			margin-top: min(.1rem, 10px);
+		}
+	}
+	&-t-20 {
+		margin-top: .2rem;
+		@include v.mq(land) {
+			margin-top: min(.2rem, 20px);
+		}
+	}
+	&-t-30 {
+		margin-top: .3rem;
+		@include v.mq(land) {
+			margin-top: min(.3rem, 30px);
+		}
+	}
+	&-t-40 {
+		margin-top: .4rem;
+		@include v.mq(land) {
+			margin-top: min(.4rem, 40px);
+		}
+	}
+}
+/*----- padding -----*/
+.pd {
+	&-0 {
+		padding: 0 !important;
+	}
+	&-b-0 {
+		padding-bottom: 0 !important;
+	}
+	&-b-10 {
+		padding-bottom: .1rem;
+		@include v.mq(land) {
+			padding-bottom: min(.1rem, 10px);
+		}
+	}
+	&-b-20 {
+		padding-bottom: .2rem;
+		@include v.mq(land) {
+			padding-bottom: min(.2rem, 20px);
+		}
+	}
+	&-b-30 {
+		padding-bottom: .3rem;
+		@include v.mq(land) {
+			padding-bottom: min(.3rem, 30px);
+		}
+	}
+	&-b-40 {
+		padding-bottom: .4rem;
+		@include v.mq(land) {
+			padding-bottom: min(.4rem, 40px);
+		}
+	}
+	&-t-10 {
+		padding-top: .1rem;
+		@include v.mq(land) {
+			padding-top: min(.1rem, 10px);
+		}
+	}
+	&-t-20 {
+		padding-top: .2rem;
+		@include v.mq(land) {
+			padding-top: min(.2rem, 20px);
+		}
+	}
+	&-t-30 {
+		padding-top: .3rem;
+		@include v.mq(land) {
+			padding-top: min(.3rem, 30px);
+		}
+	}
+	&-t-40 {
+		padding-top: .4rem;
+		@include v.mq(land) {
+			padding-top: min(.4rem, 40px);
+		}
+	}
+}
+/****** Clearfix ******/
+.cf {
+	@include v.cf;
+}

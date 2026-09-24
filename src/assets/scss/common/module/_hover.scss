@@ -1,0 +1,47 @@
+@charset "utf-8";
+/////////////////////////////////////
+//	Config
+/////////////////////////////////////
+@use "sass:math";
+@use "../../setting/_index" as v;
+/****** hover ******/
+.hover {
+	&-brightness {
+		display: block;
+		img {
+			@include v.mq(land) {
+				transition: filter .3s ease;
+			}
+		}
+		&:hover {
+				img {
+				@include v.mq(land) {
+					filter: brightness(1.2);
+				}
+			}
+		}
+	}
+	&-opacity {
+		display: block;
+		@include v.mq(land) {
+			transition: opacity .3s ease;
+		}
+		&:hover {
+			@include v.mq(land) {
+				opacity: .8;
+			}
+		}
+	}
+	&-text {
+		text-decoration: underline;
+		@include v.mq(land) {
+			text-decoration-color: transparent;
+			transition: text-decoration-color .3s ease;
+		}
+		&:hover {
+			@include v.mq(land) {
+				text-decoration-color: var(--color-border-primary);
+			}
+		}
+	}
+}

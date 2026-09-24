@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="<%= site.lang %>">
 <head>
-  <% const pageDepth = (pageData.slug || '').split('/').filter(Boolean).length; %>
-  <% const assetBasePath = isDevelopment || site.pathMode !== 'relative' ? '/' : pageDepth === 0 ? './' : '../'.repeat(pageDepth); %>
-  <% const fn = imageTagHelpers.create(assetBasePath); %>
-  <%- include('../partials/_meta') %>
-  <%- include('../partials/_css', { assetBasePath }) %>
-  <%- include('../partials/_js', { assetBasePath }) %>
+<% const pageDepth = (pageData.slug || '').split('/').filter(Boolean).length; _%>
+<%
+  const assetBasePath = isDevelopment || site.pathMode !== 'relative' ? '/' : pageDepth === 0 ? './' : '../'.repeat(pageDepth);
+  const fn = imageTagHelpers.create(assetBasePath);
+  const pageClass = `page-${pageData.slug}`;
+  const lowerPageClass = pageData.slug === 'home' ? '' : ' page-lower';
+  const pageTemplate = pageData.page.includes('/')
+    ? pageData.page.replace(/\/index$/, '/_index')
+    : `_${pageData.page}`;
+_%>
+<%- include('../partials/_meta') _%>
+<%- include('../partials/_css', { assetBasePath }) _%>
+<%- include('../partials/_js', { assetBasePath }) _%>
 </head>
-<body class="page-<%= pageData.page %>">
-
-  <%- include('../modules/_header', { fn }) %>
-
-  <main class="main-content">
-    <%- content %>
-  </main>
-
-  <%- include('../modules/_footer', { fn }) %>
-
+<body class="<%= pageClass %><%= lowerPageClass %>">
+<%- include('../modules/_header', { fn }) _%>
+<div class="wrapper" id="wrapper">
+  <%- include(`../pages/${pageTemplate}`, { fn, assetBasePath }) _%>
+</div>
+<%- include('../modules/_footer', { fn }) _%>
 </body>
 </html>

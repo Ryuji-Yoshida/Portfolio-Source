@@ -1,11 +1,12 @@
 {
   "lang": "ja",
-  "siteName": "サイト名",
+  "siteName": "MarkUp Studio | Ryuji Yoshida Portfolio Site",
   "pathMode": "root",
-  "defaultDescription": "サイト全体の説明文",
+  "defaultDescription": "マークアップエンジニア 吉田隆二のポートフォリオ。HTML/CSS/JSによる高品質なコーディングに加え、React/Next.js/TypeScriptを活用したモダンなUI実装・フロントエンド構築にも対応。WordPress構築も可能です。",
+  "defaultKeywords": "吉田隆二,Ryuji Yoshida,マークアップエンジニア,HTML,CSS,React,Next.js,TypeScript,WordPress,コーディング,ポートフォリオ,MarkUp Studio",
   "defaultOgImage": "/assets/images/ogp.jpg",
-  "author": "制作者名",
-  "copyright": "サイト名",
+  "author": "Ryuji Yoshida",
+  "copyright": "© 2023 Ryuji Yoshida",
   "navigation": [
     {
       "label": "Works",
@@ -14,6 +15,7 @@
   ],
   "socialLinks": {
     "twitter": "",
+    "facebook": "https://www.facebook.com/yossiRyuu",
     "instagram": ""
   }
 }

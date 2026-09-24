@@ -1,0 +1,264 @@
+/* Print overrides: append after the current CSS */
+@page {
+  size: A4 portrait;
+  margin: 12mm;
+}
+
+html,
+body {
+  width: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  background: #fff !important;
+  color: #333 !important;
+  font-size: 10pt !important;
+  line-height: 1.55 !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  animation: none !important;
+  transition: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+body {
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif !important;
+  font-feature-settings: normal !important;
+}
+
+a {
+  color: #005797 !important;
+  text-decoration: underline !important;
+}
+
+img,
+svg {
+  max-width: 100% !important;
+  height: auto !important;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Fixed / animated UI is the main source of PDF overlap. */
+.header--site,
+.floatmenu,
+#CookiebotWidget,
+.global__nav-btn,
+.global__nav-list,
+[data-js-elem="floatmenu"] {
+  display: none !important;
+}
+
+.wrapper,
+.main,
+.sec,
+.sec__inner,
+.conts {
+  width: auto !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  overflow: visible !important;
+}
+
+.page-lower .wrapper {
+  padding-top: 0 !important;
+}
+
+.main .sec__inner {
+  padding-top: 8mm !important;
+  padding-bottom: 8mm !important;
+}
+
+.sec-fv {
+  display: block !important;
+  min-height: 0 !important;
+}
+
+.sec-fv .sec__inner {
+  width: auto !important;
+  padding-top: 0 !important;
+  padding-bottom: 8mm !important;
+}
+
+.page__ttl {
+  margin-bottom: 8mm !important;
+  text-align: left !important;
+}
+
+.page__ttl-logo svg {
+  max-width: 120mm !important;
+}
+
+.page__ttl-logo::after,
+.page__ttl-text::after {
+  margin: 3mm 0 !important;
+}
+
+.page__ttl-text,
+.sec__ttl {
+  font-size: 22pt !important;
+  line-height: 1.25 !important;
+}
+
+.page__ttl-name,
+.conts__ttl {
+  font-size: 15pt !important;
+  line-height: 1.35 !important;
+}
+
+.text__item-lead,
+.linkbtn__item-label,
+.sec-works .works__item-info-name {
+  font-size: 12pt !important;
+}
+
+.notes__item,
+.sec-works .works__item-info-pic,
+.footer--site__copyright small {
+  font-size: 8pt !important;
+}
+
+.table {
+  display: table !important;
+  width: 100% !important;
+  background: #fff !important;
+  border-collapse: collapse !important;
+}
+
+.table__item {
+  display: table-row !important;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.table__item-th,
+.table__item-td {
+  display: table-cell !important;
+  padding: 3mm 4mm !important;
+  vertical-align: top !important;
+  border-right: 1px solid #999 !important;
+  border-bottom: 1px solid #999 !important;
+}
+
+.table__item-th {
+  width: 32% !important;
+  border-right: 1px solid #999 !important;
+}
+
+.table__item-td {
+  width: 68% !important;
+}
+
+.sec-works .works,
+.sec-works .works--list,
+.sec-contact .sec__inner,
+.sec-contact .conts,
+.sec-outbound .bnr,
+.footer--site__nav--list {
+  display: block !important;
+}
+
+.sec-works .works__item,
+.sec-works .works--list__item {
+  display: grid !important;
+  grid-template-columns: 34% 1fr;
+  gap: 5mm;
+  width: 100% !important;
+  margin: 0 0 6mm !important;
+  padding: 4mm !important;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.sec-works .works__item-thumb,
+.sec-works .works--list__item .image,
+.sec-works .works__item-info,
+.sec-works .works--list__item .detail {
+  width: auto !important;
+  margin: 0 !important;
+}
+
+.sec-contact {
+  display: block !important;
+  margin-bottom: 8mm !important;
+}
+
+.sec-contact .conts,
+.sec-contact .conts__ttl,
+.sec-contact .linkbtn,
+.sec-contact .sns__list {
+  width: auto !important;
+  margin: 0 0 4mm !important;
+}
+
+.linkbtn__item {
+  display: inline-block !important;
+  min-width: 0 !important;
+  padding: 2mm 4mm !important;
+  background: #005797 !important;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.footer--site {
+  padding-bottom: 0 !important;
+}
+
+.footer--site__inner,
+.footer--site__nav {
+  background: #fff !important;
+  color: #333 !important;
+}
+
+.footer--site__nav,
+.footer--site__copyright {
+  padding: 3mm 0 !important;
+}
+
+.footer--site__nav--list__item {
+  display: inline-block !important;
+  margin-right: 5mm !important;
+  font-size: 9pt !important;
+}
+
+.hide-sp,
+.hide-tb,
+.hide-pc,
+[data-js-anime="sec"] [data-js-anime-sec="ttl"],
+[data-js-anime="sec"] [data-js-anime-sec="conts"],
+html.is-init .footer--site,
+html.is-init .sec:not(.sec-fv) {
+  display: revert !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+h1, h2, h3,
+.page__ttl,
+.sec__ttl,
+.conts__ttl,
+.table__item,
+.works__item,
+.works--list__item {
+  break-after: auto;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}

@@ -1,0 +1,412 @@
+@charset "utf-8";
+/////////////////////////////////////
+//	Config
+/////////////////////////////////////
+@use "sass:math";
+@use "../setting/_index" as v;
+
+/************************************
+	header
+************************************/
+.header--site {
+	position: fixed;
+	right: 0;
+	top: 0;
+	@include v.z-index(l9);
+	@include v.mq(land) {
+		right: min(.4rem, 40px);
+		top: min(.4rem, 40px);
+	}
+	&::after {
+		background-color: var(--color-background-primary);
+		border-radius: 100%;
+		content: "";
+		display: block;
+		position: absolute;
+		@include v.z-index(l-1);
+	}
+	.global__nav {
+		&-btn {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			position: absolute;
+      right: .4rem;
+      top: .4rem;
+			@include v.mq(land) {
+				right: min(.2rem, 20px);
+				top: min(.2rem, 20px);
+			}
+			&__item {
+				color: var(--color-text-light);
+				font-weight: 500;
+				pointer-events: none;
+				text-align: center;
+				&::before,
+				&::after {
+					background-color: var(--color-background);
+					content: "";
+					display: block;
+					height: min(.02rem, 2px);
+					width: 100%;
+				}
+				&::before {
+					margin-bottom: min(.08rem, 8px);
+				}
+				&::after {
+					margin-top: min(.08rem, 8px);
+				}
+			}
+		}
+		&-list {
+			@include v.mq(sp) {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				height: 100%;
+				left:	0;
+				pointer-events: none;
+				position: fixed;
+				top: 0;
+				width: 100%;
+				@include v.z-index(l-1);
+			}
+			&__item {
+				pointer-events: auto;
+				&:not(:last-of-type) {
+					margin-bottom: .48rem;
+					@include v.mq(land) {
+						margin-bottom: min(.24rem, 24px);
+					}
+				}
+			}
+			a {
+				color: var(--color-text-light);
+				display: inline-block;
+				font-size: .4rem;
+				font-weight: 500;
+				position: relative;
+				@include v.mq(land) {
+					font-size: min(.24rem, 24px);
+				}
+				&::after {
+					@include v.mq(land) {
+						background-color: var(--color-background);
+						content: "";
+						display: block;
+						height: min(.02rem, 2px);
+						margin-top: .2em;
+					}
+				}
+			}
+		}
+	}
+	&-lower {
+		left: 0;
+		right: auto;
+		@include v.z-index(l9);
+		@include v.mq(sp) {
+			background-color: var(--color-background-primary);
+			padding: .3rem .4rem;
+			width: 100%;
+		}
+		@include v.mq(land) {
+			left: min(.4rem, 40px);
+			right: auto;
+			top: min(.4rem, 40px);
+		}
+    &::after {
+      @include v.mq(land) {
+        height: 4rem;
+        left: -1.8rem;
+        right: auto;
+        top: -2rem;
+        width: 4rem;
+      }
+    }
+    .header--site__ttl {
+    	@include v.mq(land) {
+    		margin-top: .2rem;
+    		margin-left: -.1rem;
+    	}
+    	a, span {
+	    	display: flex;
+	    	@include v.mq(sp) {
+	    		flex-wrap: wrap;
+	    		align-items: center;
+	    		justify-content: space-between;
+	    	}
+	    	@include v.mq(land) {
+	    		flex-direction: column;
+	    	}
+    	}
+    	&-logo {
+    		display: block;
+    		line-height: 0;
+    		width: 48%;
+    		@include v.mq(sp) {
+    			border-right: 1px solid var(--color-border-light);
+    			margin-right: 4%;
+    			padding-right: 4%;
+    		}
+    		@include v.mq(land) {
+    			border-bottom: 1px solid var(--color-border-light);
+    			margin-bottom: min(.05rem, 5px);
+    			padding-bottom: min(.05rem, 5px);
+    			width: 1.8rem;
+    		}
+    	}
+    	&-name {
+    		color: var(--color-text-light);
+    		display: block;
+    		font-size: .2rem;
+    		width: 48%;
+    		@include v.mq(land) {
+    			font-size: .1rem;
+    			width: 100%;
+    		}
+    	}
+    }
+	}
+}
+/************************************
+	footer
+************************************/
+.footer--site {
+	@include v.mq(sp) {
+		padding-bottom: calc(13vw + 2px);
+	}
+	&__inner {
+		background-color: var(--color-background-primary);
+		color: var(--color-text-light);
+	}
+	&__nav {
+		background-color: rgba(var(--color-rgb-white), .9);
+		padding: .2rem;
+		@include v.mq(land) {
+			padding: 20px;
+		}
+		&--list {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			&__item {
+				font-weight: 500;
+				@include v.mq(land) {
+					font-size: 16px;
+				}
+				&:not(:last-child) {
+					margin-right: min(.4rem, 40px);
+				}
+				a {
+					&::after {
+						background-image: url('/assets/images/arrow_ic-r.svg');
+						background-position: center;
+						background-repeat: no-repeat;
+						background-size: contain;
+						content: "";
+						display: inline-block;
+						height: .6em;
+						margin-left: .4em;
+						vertical-align: middle;
+						width: .4em;
+					}
+				}
+			}
+		}
+	}
+	&__copyright {
+		line-height: 1;
+		padding: .15rem;
+		text-align: center;
+		@include v.mq(land) {
+			padding: 10px;
+		}
+		small {
+			font-size: .22rem;
+			@include v.mq(land) {
+				font-size: 12px;
+			}
+		}
+	}
+}
+/************************************
+	Floatmenu
+************************************/
+.floatmenu {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  @include v.z-index(l99);
+  @include v.mq(sp) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    left: 0;
+  }
+  @include v.mq(land) {
+    bottom: min(.1rem, 10px);
+    right: 0;
+    width: min(.68rem, 68px);
+  }
+  &__item {
+    background-color: var(--color-background-primary);
+    @include v.mq(land) {
+      width: 100%;
+    }
+    a {
+      color: var(--color-text-light);
+      display: flex;
+      height: 100%;
+      padding: .2rem;
+      width: 100%;
+      @include v.mq(sp) {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      }
+      @include v.mq(land) {
+        padding: min(.2rem, 20px) min(.1rem, 10px);
+      }
+    }
+    .floatmenu__item--ic {
+      display: block;
+      line-height: 0;
+      pointer-events: none;
+    }
+    .floatmenu__item--label {
+      display: block;
+    }
+    &-contact {
+      @include v.mq(sp) {
+        width: calc(55% - 2px);
+      }
+      @include v.mq(land) {
+        margin-bottom: min(.05rem, 5px);
+        writing-mode: vertical-rl;
+      }
+      a {
+        @include v.mq(land) {
+          flex-wrap: wrap;
+          align-items: center;
+        }
+      }
+      .floatmenu__item--ic {
+        width: .4rem;
+        @include v.mq(sp) {
+          margin-right: .1rem;
+        }
+        @include v.mq(land) {
+          margin-bottom: min(.05rem, 5px);
+          width: min(.24rem, 24px);
+        }
+      }
+      .floatmenu__item--label {
+        font-size: .28rem;
+        @include v.mq(land) {
+          font-size: min(.16rem, 16px);
+        }
+      }
+    }
+    &-sns {
+      @include v.mq(sp) {
+        width: calc(20% - 2px);
+      }
+      @include v.mq(land) {
+        margin-bottom: min(.2rem, 20px);
+      }
+      a {
+        @include v.mq(land) {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+      .floatmenu__item--ic {
+        width: .44rem;
+        @include v.mq(land) {
+          width: min(.28rem, 28px);
+        }
+      }
+    }
+    &-totop {
+      @include v.mq(sp) {
+        width: calc(25% - 2px);
+      }
+      @include v.mq(land) {
+        background-color: transparent;
+      }
+      a {
+        flex-direction: column;
+        align-items: center;
+        @include v.mq(land) {
+          color: var(--color-text-primary);
+          padding: min(.2rem, 20px) min(.1rem, 10px);
+        }
+      }
+      .floatmenu__item--ic {
+        height: .56rem;
+        position: relative;
+        width: .56rem;
+        @include v.mq(land) {
+          height: min(.48rem, 48px);
+          width: min(.48rem, 48px);
+        }
+        svg {
+          fill: var(--color-background);
+          height: 100%;
+          left: 0;
+          position: absolute;
+          top: 0;
+          width: 100%;
+          @include v.mq(land) {
+            fill: var(--color-background-primary);
+          }
+        }
+      }
+      .floatmenu__item--label {
+        font-size: .2rem;
+        @include v.mq(sp) {
+          display: none;
+        }
+        @include v.mq(land) {
+          font-size: min(.12rem, 12px);
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+/************************************
+	Container
+************************************/
+.page-lower {
+	.wrapper {
+		@include v.mq(sp) {
+			padding-top: .8rem;
+		}
+	}
+}
+.main {
+	.sec {
+		&__inner {
+			padding: .8rem .4rem;
+			@include v.mq(land) {
+				margin-right: auto;
+				margin-left: auto;
+				padding: min(.8rem, 80px) min(.4rem, 40px);
+				width: min(14.4rem, 1440px);
+			}
+		}
+	}
+	.conts {
+		margin-right: .4rem;
+		margin-left: .4rem;
+		@include v.mq(land) {
+			margin-right: min(.4rem, 40px);
+			margin-left: min(.4rem, 40px);
+		}
+	}
+}

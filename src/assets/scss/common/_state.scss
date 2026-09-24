@@ -1,0 +1,397 @@
+@charset "utf-8";
+/////////////////////////////////////
+//	Config
+/////////////////////////////////////
+@use "../setting/_index" as v;
+/************************************
+  State
+************************************/
+html {
+  // 初回アクセス
+  &.is-init {
+    height: 100vh;
+    overflow: hidden;
+    width: 100%;
+    @include v.mq(land) {
+      overflow: hidden scroll;
+    }
+    .header--site {
+      opacity: 0;
+      &::after {
+        @include v.mq(land) {
+          transform: scale(0);
+        }
+      }
+    }
+    [data-js-elem="floatmenu"] {
+      @include v.mq(sp) {
+        transform: translateY(1.28rem);
+      }
+      @include v.mq(land) {
+        transform: translateX(min(.76rem, 76px));
+      }
+    }
+    .footer--site,
+    .sec:not(.sec-fv) {
+      display: none;
+    }
+    .page__ttl {
+      &-logo {
+        #logo .cls-1 {
+          animation: svg1 4s ease-in forwards;
+          animation-delay: 2s;
+          fill: transparent;
+          stroke: #333;
+          stroke-dasharray: 2000px;
+          stroke-dashoffset: 2000px;
+          will-change: transform, opacity, width;
+        }
+        #logo .cls-2 {
+          animation: svg2 4s ease-in forwards;
+          animation-delay: 2s;
+          fill: transparent;
+          stroke-dasharray: 2000px;
+          stroke-dashoffset: 2000px;
+          will-change: transform, opacity, width;
+        }
+        &::after {
+          width: 0;
+        }
+      }
+      &-name {
+        line-height: 0;
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  }
+  &.is-anime {
+    .header--site {
+      transition: all .6s .8s;
+      will-change: transform, opacity, width;
+      &::after {
+        @include v.mq(land) {
+          transition: all .6s .6s;
+        }
+      }
+    }
+    .page__ttl {
+      &-logo {
+        &::after {
+          transition: all .6s .4s;
+          will-change: transform, opacity, width;
+        }
+      }
+      &-name {
+        transition: all .6s .2s;
+        will-change: transform, opacity, width;
+      }
+    }
+    [data-js-elem="floatmenu"] {
+      transition: all .6s .8s;
+      will-change: transform, opacity, width;
+    }
+  }
+  &.is-visit {
+    [data-js-anime="sec"] {
+      [data-js-anime-sec="ttl"] {
+        opacity: 1;
+      }
+      [data-js-anime-sec="conts"] {
+        opacity: 1;
+      }
+    }
+  }
+  &:not(.is-init) {
+    #logo .cls-1,
+    #logo .cls-2 {
+      animation: none;
+    }
+  }
+}
+// 追従メニュー
+[data-js-elem="floatmenu"] {
+  &.is-stop {
+    @include v.mq(land) {
+      bottom: calc(min(.1rem, 10px) + 88px);
+    }
+  }
+}
+// ヘッダー
+[data-js-elem="header"] {
+  &::after {
+    transition: all .6s;
+    will-change: transform, opacity, width;
+    @include v.mq(sp) {
+      height: 4rem;
+      right: -2.2rem;
+      top: -2.2rem;
+      width: 4rem;
+    }
+    @include v.mq(land) {
+      height: 8rem;
+      right: -4.4rem;
+      top: -4.4rem;
+      width: 8rem;
+    }
+  }
+  .global__nav {
+    &-btn {
+      @include v.mq(land) {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0);
+        @include v.z-index(l-1);
+      }
+      transition: all .6s;
+      will-change: transform, opacity, width;
+      &__item {
+        &::before,
+        &::after {
+          transition: all .6s;
+        }
+        &-label {
+          transition: all .2s;
+        }
+      }
+    }
+    &-list {
+      transition: all .6s;
+      will-change: transform, opacity, width;
+      @include v.mq(sp) {
+        opacity: 0;
+      }
+    }
+  }
+  & ~ [data-js-elem="floatmenu"] {
+    transition: all .6s;
+    will-change: transform, opacity, width;
+    .floatmenu {
+      &__item {
+        @include v.mq(sp) {
+          transition: all .6s;
+          will-change: transform, opacity, width;
+        }
+      }
+    }
+  }
+  [data-js-trigger="gnav"] {
+    &::after {
+      @include v.mq(land) {
+        transition: all .6s;
+        width: 0;
+        will-change: transform, opacity, width;
+      }
+    }
+    &:hover {
+      &::after {
+        @include v.mq(land) {
+          width: 100%;
+        }
+      }
+    }
+  }
+  &.is-active {
+    &::after {
+      @include v.mq(sp) {
+        height: 300vh;
+        right: -50vh;
+        top: -50vw;
+        width: 300vw;
+      }
+    }
+    .global__nav {
+      position: relative;
+      &-btn {
+        @include v.mq(sp) {
+          height: .6rem;
+          width: .6rem;
+          @include v.z-index(l99);
+        }
+        &__item {
+          &::before,
+          &::after {
+            @include v.mq(sp) {
+              position: absolute;
+              top: 50%;
+            }
+          }
+          &::before {
+            @include v.mq(sp) {
+              margin-bottom: 0;
+              transform: translateY(-50%) rotate(-45deg);
+            }
+          }
+          &::after {
+            @include v.mq(sp) {
+              margin-top: 0;
+              transform: translateY(-50%) rotate(45deg);
+            }
+          }
+          &-label {
+            @include v.mq(sp) {
+              opacity: 0;
+              visibility: hidden;
+            }
+          }
+        }
+      }
+      &-list {
+        @include v.mq(sp) {
+          opacity: 1;
+          @include v.z-index(l1);
+        }
+      }
+    }
+    & ~ [data-js-elem="floatmenu"] {
+      @include v.mq(sp) {
+        @include v.z-index(l99);
+      }
+      .floatmenu {
+        &__item {
+          @include v.mq(sp) {
+            background-color: var(--color-secondary);
+          }
+        }
+      }
+      &.is-stop {
+        @include v.mq(sp) {
+          bottom: 0;
+        }
+      }
+    }
+  }
+  &.is-small {
+    &::after {
+      @include v.mq(land) {
+        height: 4rem;
+        right: -2.2rem;
+        top: -2.2rem;
+        width: 4rem;
+      }
+    }
+    .global__nav {
+      &-btn {
+        @include v.mq(land) {
+          opacity: 1;
+          pointer-events: auto;
+          transform: scale(1);
+          @include v.z-index(l1);
+        }
+      }
+      &-list {
+        @include v.mq(land) {
+          transform: scale(0);
+        }
+      }
+    }
+    &.is-active {
+      &::after {
+        @include v.mq(land) {
+          height: 8rem;
+          right: -4.4rem;
+          top: -4.4rem;
+          width: 8rem;
+        }
+      }
+      .global__nav {
+        &-btn {
+          @include v.mq(land) {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0);
+            @include v.z-index(l-1);
+          }
+        }
+        &-list {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+}
+// セクション
+[data-js-anime="sec"] {
+  [data-js-anime-sec="ttl"] {
+    opacity: 0;
+    strong {
+      color: var(--color-text);
+      transition: color .6s;
+      transition-delay: .6s;
+      will-change: color;
+    }
+  }
+  [data-js-anime-sec="conts"] {
+    opacity: 0;
+  }
+  &.is-anime {
+    [data-js-anime-sec="ttl"] {
+      animation: flowing .6s ease-in forwards;
+      will-change: filter, letter-spacing, transform, opacity, width;
+      strong {
+        color: var(--color-text-primary);
+      }
+    }
+    [data-js-anime-sec="conts"] {
+      animation: fadeIn .6s ease-in forwards;
+      animation-delay: .6s;
+      will-change: transform, opacity, width;
+    }
+  }
+}
+// CookiePolicyスキャン中
+.page-cp {
+  .wrapper {
+    @include v.mq(land) {
+      min-height: calc(100vh - 94px);
+    }
+  }
+}
+/************************************
+  Anime
+************************************/
+@keyframes svg1 {
+  40% {
+    stroke-dashoffset: 0;
+  }
+  50% {
+    fill: transparent;
+  }
+  70% {
+    fill: #333;
+  }
+  100% {
+    fill: #005797;
+    stroke: #005797;
+  }
+}
+@keyframes svg2 {
+  40% {
+    stroke-dashoffset: 0;
+  }
+  50% {
+    fill: transparent;
+  }
+  70%, 100% {
+    fill: #333;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes flowing {
+  0% {
+    letter-spacing: -0.75em;
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}

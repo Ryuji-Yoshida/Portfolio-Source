@@ -1,0 +1,89 @@
+@charset "utf-8";
+/////////////////////////////////////
+//  Config
+/////////////////////////////////////
+@use "../setting/_index" as v;
+/************************************
+    base
+************************************/
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+html {
+  box-sizing: border-box;
+  font-size: var(--font-size-sp);
+  @include v.mq(land) {
+    font-size: var(--font-size-pc);
+  }
+}
+*,::after,::before{
+  box-sizing: inherit
+}
+body {
+  background-color: rgba(var( --color-rgb-blue), .02);
+  color: var(--color-text);
+  font-family: var( --font-family-note);
+  font-size: .24rem;
+  font-feature-settings: "palt";
+  @include v.mq(land) {
+    font-size: min(.2rem, 20px);
+
+  }
+  a {
+    backface-visibility: hidden;
+    border: none;
+    color: var(--color-text-primary);
+    outline: none;
+    text-decoration: none;
+  }
+  ul {
+    li {
+      list-style: none;
+      a {
+        display: block;
+      }
+    }
+  }
+  img {
+    @include v.imgfit;
+    border: none;
+    image-rendering: -webkit-optimize-contrast;
+    margin: auto;
+    outline: none;
+    &.base-size {
+      height: auto;
+      width: auto;
+    }
+  }
+  button {
+    backface-visibility: hidden;
+    cursor: pointer;
+    outline: none;
+  }
+  .wrapper {
+    letter-spacing: .005rem;
+    line-height: 1.8;
+    @include v.mq(land) {
+      letter-spacing: min(.01rem, 1px);
+    }
+  }
+}
+/************************************
+  Cookiebot
+************************************/
+#CookiebotWidget {
+  display: none;
+}
+/************************************
+    hack
+************************************/
+.ua-ie {
+  main,
+  aside,
+  article,
+  section {
+     display: block;
+  }
+}

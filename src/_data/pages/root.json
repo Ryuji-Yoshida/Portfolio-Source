@@ -1,7 +1,17 @@
 [
   {
-    "slug": "",
-    "title": "トップページ",
-    "page": "top"
+    "slug": "home",
+    "title": "",
+    "page": "index"
+  },
+  {
+    "slug": "pp",
+    "title": "Privacy Policy",
+    "page": "privacy-policy"
+  },
+  {
+    "slug": "cp",
+    "title": "Cookie Policy",
+    "page": "cookie-policy"
   }
 ]

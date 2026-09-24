@@ -1,0 +1,144 @@
+@charset "utf-8";
+/////////////////////////////////////
+//	Config
+/////////////////////////////////////
+@use "sass:math";
+@use "../../setting/_index" as v;
+/****** 見出し/リード文/説明文 ******/
+.page__ttl {
+  text-align: center;
+  width: 100%;
+  &-logo {
+    display: block;
+    svg {
+      @include v.mq(land) {
+        max-width: min(8.6rem, 860px);
+      }
+    }
+    &::after {
+      background-color: var(--color-background-dark);
+      content: "";
+      display: block;
+      height: 1px;
+      margin: .4rem 0 .2rem;
+      width: 100%;
+      @include v.mq(land) {
+        margin: min(.4rem, 40px) 0 min(.2rem, 20px);
+      }
+    }
+  }
+  &-text {
+    display: inline-block;
+    font-size: .64rem;
+    font-weight: 700;
+    @include v.mq(land) {
+      font-size: min(.64rem, 64px);
+    }
+    &::after {
+      background-color: var(--color-background-dark);
+      content: "";
+      display: block;
+      height: 1px;
+      margin: .1rem 0 .2rem;
+      width: 100%;
+      @include v.mq(land) {
+        margin: min(.1rem, 10px) 0 min(.2rem, 20px);
+      }
+    }
+  }
+  &-name {
+    display: block;
+    font-family: var(--font-family-josefin);
+    font-size: .4rem;
+    font-weight: 700;
+    @include v.mq(land) {
+      font-size: min(.4rem, 40px);
+    }
+  }
+}
+.sec__ttl {
+  font-family: var(--font-family-josefin);
+  font-size: .68rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: .2rem;
+  @include v.mq(land) {
+    font-size: min(.64rem, 64px);
+    margin-bottom: min(.2rem, 20px);
+  }
+  strong {
+    color: var(--color-text-primary);
+  }
+  small {
+    font-size: .6em;
+  }
+}
+.conts__ttl {
+  color: var(--color-text-primary);
+  font-family: var(--font-family-josefin);
+  font-size: .44rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: .2rem;
+  @include v.mq(land) {
+    font-size: min(.44rem, 44px);
+    margin-bottom: min(.2rem, 20px);
+  }
+  &-label {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+  }
+  &::before {
+    color: var(--color-text);
+    content: "»";
+    display: inline-block;
+    height: 1em;
+    line-height: 1;
+  }
+}
+/****** テキスト ******/
+.text {
+	&__item {
+		&:not(:last-of-type) {
+			margin-bottom: 1.5em;
+		}
+    &-lead {
+      font-size: .28rem;
+      font-weight: 500;
+      @include v.mq(land) {
+        font-size: min(.24rem, 24px);
+      }
+    }
+    &-dt {
+      color: var(--color-text-primary);
+      font-weight: 500;
+      &::before {
+        content: "■";
+        margin-right: .2em;
+      }
+      &:not(:last-of-type) {
+        margin-bottom: .2em;
+      }
+    }
+	}
+  &__link {
+    text-decoration: underline;
+    &:hover {
+      @include v.mq(land) {
+        text-decoration: none;
+      }
+    }
+  }
+}
+/****** 注釈文 ******/
+.notes {
+  &__item {
+    font-size: .2rem;
+    padding-left: 1em;
+    text-indent: -1em;
+    @include v.mq(land) {
+      font-size: min(.16rem, 16px);
+    }
+  }
+}
