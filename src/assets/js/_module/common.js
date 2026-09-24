@@ -1,65 +1,95 @@
-import $ from 'jquery';
-import { click } from './constants';
+// common.js
+import { gsap } from 'gsap';
 
 export default function common() {
+  const headerElem = document.querySelector('[data-js-elem="header"]');
+  const trigger = document.querySelector('[data-js-trigger="gnav"]');
+
   // グローバルナビ
-  const elem = '[data-js-elem="header"]';
-  const trigger = '[data-js-trigger="gnav"]';
-  const menu = '[data-js-trigger="menu"]';
+  if (trigger && headerElem) {
+    // メニュー開閉（イベント委任）
+    document.addEventListener('click', (e) => {
+      const menuBtn = e.target.closest('[data-js-trigger="menu"]');
+      if (!menuBtn) return;
 
-  if ($(trigger).length) {
-    $(document).on(click, '[data-js-elem="header"]:not(.is-active) ' + menu, function () {
-      $(elem).addClass('is-active');
-    });
-    $(document).on(click, '.is-active[data-js-elem="header"] ' + menu, function () {
-      $(elem).removeClass('is-active');
-    });
-
-    $(window).on('load', function () {
-      $(document).on(click, trigger, function (e) {
-        const href = $(this).attr('href');
-        const target = $(href === '#' || href === '' ? 'html' : href);
-        const pos = target.offset().top;
-
-        $('html, body').animate({ scrollTop: pos }, 400, 'swing');
-        e.preventDefault();
-      });
-    });
-
-    $(window).on('load scroll', function () {
-      const thisPos = $(window).scrollTop();
-      if (thisPos > 200) {
-        $(elem).addClass('is-small');
+      if (!headerElem.classList.contains('is-active')) {
+        headerElem.classList.add('is-active');
       } else {
-        $(elem).removeClass('is-small');
-      }
-      if ($(elem).hasClass('is-active')) {
-        $(elem).removeClass('is-active');
+        headerElem.classList.remove('is-active');
       }
     });
+
+    // スムーススクロール関数
+    const scrollToTarget = (href) => {
+      const target = href === '#' || href === '' ? 'html' : href;
+      if (window.lenis) {
+        window.lenis.scrollTo(target, { duration: 1.2 });
+      } else {
+        gsap.to(window, { duration: 0.4, scrollTo: target, ease: 'power2.out' });
+      }
+    };
+
+    // Gnav トリガー
+    document.addEventListener('click', (e) => {
+      const gnavLink = e.target.closest('[data-js-trigger="gnav"]');
+      if (!gnavLink) return;
+
+      e.preventDefault();
+      const href = gnavLink.getAttribute('href');
+      scrollToTarget(href);
+    });
+
+    // ヘッダーの縮小・アクティブ解除（Lenisのスクロールイベント利用）
+    const handleScroll = () => {
+      const currentPos = window.scrollY || document.documentElement.scrollTop;
+
+      if (currentPos > 200) {
+        headerElem.classList.add('is-small');
+      } else {
+        headerElem.classList.remove('is-small');
+      }
+
+      if (headerElem.classList.contains('is-active')) {
+        headerElem.classList.remove('is-active');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
   }
 
-  // アンカーリンク
-  const anchorTrigger = '[data-js-trigger="anchor"]';
-  $(document).on(click, anchorTrigger, function (e) {
-    const href = $(this).attr('href');
-    const target = $(href === '#' || href === '' ? 'html' : href);
-    const position = target.offset().top;
+  // 汎用アンカーリンク
+  document.addEventListener('click', (e) => {
+    const anchor = e.target.closest('[data-js-trigger="anchor"]');
+    if (!anchor) return;
 
-    $('html, body').animate({ scrollTop: position }, 400, 'swing');
     e.preventDefault();
-  });
+    const href = anchor.getAttribute('href');
+    const target = href === '#' || href === '' ? 'html' : href;
 
-  // 追従メニュー
-  $(window).on('scroll', function () {
-    const documentHeight = $(document).height();
-    const scrollPosition = $(this).height() + $(this).scrollTop();
-    const footerHeight = $('.footer--site').innerHeight() || 0;
-
-    if (documentHeight - scrollPosition <= footerHeight) {
-      $('[data-js-elem="floatmenu"]').addClass('is-stop');
+    if (window.lenis) {
+      window.lenis.scrollTo(target, { duration: 1.2 });
     } else {
-      $('[data-js-elem="floatmenu"]').removeClass('is-stop');
+      gsap.to(window, { duration: 0.4, scrollTo: target, ease: 'power2.out' });
     }
   });
+
+  // 追従メニュー処理
+  const floatMenu = document.querySelector('[data-js-elem="floatmenu"]');
+  const footer = document.querySelector('.footer--site');
+
+  if (floatMenu && footer) {
+    const checkFloatMenu = () => {
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const footerHeight = footer.offsetHeight || 0;
+
+      if (documentHeight - scrollPosition <= footerHeight) {
+        floatMenu.classList.add('is-stop');
+      } else {
+        floatMenu.classList.remove('is-stop');
+      }
+    };
+
+    window.addEventListener('scroll', checkFloatMenu, { passive: true });
+  }
 }

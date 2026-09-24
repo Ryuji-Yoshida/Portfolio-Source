@@ -4,19 +4,11 @@ import Lenis from '@studio-freight/lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import $ from 'jquery';
-
-// プラグイン（sumoselect等）が参照できるようにグローバルへ登録する
-window.$ = $;
-window.jQuery = $;
-
-// グローバル登録の後にインポートする
-import 'sumoselect';
 
 // GSAPプラグインの登録
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-// 必要に応じて window やグローバルに公開
+// グローバル公開
 window.Cookies = Cookies;
 window.Lenis = Lenis;
 window.gsap = gsap;
@@ -28,6 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
     smoothWheel: true,
   });
   window.lenis = lenis;
+
+  // Lenis と GSAP ScrollTrigger の同期
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+  gsap.ticker.lagSmoothing(0, 0);
 
   function raf(time) {
     lenis.raf(time);

@@ -1,40 +1,58 @@
-import $ from 'jquery';
-import { htmlTag, win } from './constants';
+// animation.js
 import { refreshLenis } from './lenis';
 
 export default function animation() {
-  // ファーストビュー/初回インロト
+  const html = document.documentElement;
+
+  // ファーストビュー/初回イントロ
   const visit = sessionStorage.getItem('visit');
+
   if (visit === null) {
-    $(htmlTag).addClass('is-init');
-    $('#logo .cls-1').on('animationend webkitAnimationEnd', function () {
-      $(htmlTag).removeClass('is-init').addClass('is-anime');
-      sessionStorage.setItem('visit', 'true');
-      // 初回アクセス時はファーストビュー以外は非表示のため、高さを再取得
-      refreshLenis();
-    });
-    $('.header--site').on('transitionend webkitTransitionEnd', function () {
-      $(htmlTag).removeClass('is-anime');
-    });
+    html.classList.add('is-init');
+
+    const logoCls1 = document.querySelector('#logo .cls-1');
+    if (logoCls1) {
+      const handleLogoEnd = () => {
+        html.classList.remove('is-init');
+        html.classList.add('is-anime');
+        sessionStorage.setItem('visit', 'true');
+        refreshLenis();
+        logoCls1.removeEventListener('animationend', handleLogoEnd);
+      };
+      logoCls1.addEventListener('animationend', handleLogoEnd);
+    }
+
+    const header = document.querySelector('.header--site');
+    if (header) {
+      const handleHeaderEnd = () => {
+        html.classList.remove('is-anime');
+        header.removeEventListener('transitionend', handleHeaderEnd);
+      };
+      header.addEventListener('transitionend', handleHeaderEnd);
+    }
   } else if (visit) {
-    $(htmlTag).addClass('is-visit');
-    $('[data-js-anime="sec"]').removeAttr('data-js-anime');
+    html.classList.add('is-visit');
+    document.querySelectorAll('[data-js-anime="sec"]').forEach((el) => {
+      el.removeAttribute('data-js-anime');
+    });
     window.lenis?.start();
   }
 
-  // スクロールアニメーション
-  $(window).on('scroll', function () {
-    const elem = '[data-js-anime="sec"]';
-    $(elem).each(function () {
-      const pos = $(win).scrollTop();
-      const winH = $(win).height();
-      const offset = $(this).offset().top;
-      const animeStart = pos + winH / 1.2 > offset;
-      if (animeStart) {
-        $(this).addClass('is-anime');
-      }
-    });
-  });
+  // スクロールアニメーション（IntersectionObserverで発火）
+  const animeTargets = document.querySelectorAll('[data-js-anime="sec"]');
+  if (animeTargets.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-anime');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -20% 0px', }
+    );
+
+    animeTargets.forEach((target) => observer.observe(target));
+  }
 }
-
-

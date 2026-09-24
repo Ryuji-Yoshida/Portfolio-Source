@@ -1,32 +1,39 @@
-import $ from 'jquery';
-import { bodyTag } from './constants';
-
+// configuration.js
 export default function configuration() {
-  $(function () {
-    // ブラウザ IE判定
-    const regexpIE = /msie|trident/i;
-    if (regexpIE.test(navigator.userAgent)) {
-      $(bodyTag).addClass('ua-ie');
+  const body = document.body;
+
+  // IE判定（必要に応じて維持）
+  const regexpIE = /msie|trident/i;
+  if (regexpIE.test(navigator.userAgent)) {
+    body.classList.add('ua-ie');
+  }
+
+  // SP判定（メディアクエリ）
+  const winSize = window.matchMedia('(max-width: 1024px)');
+  const handleMQ = (e) => {
+    if (e.matches) {
+      body.classList.add('mq-sp');
+    } else {
+      body.classList.remove('mq-sp');
     }
+  };
 
-    // SP判定（メディアクエリ & UA）
-    const winSize = window.matchMedia('(max-width: 1024px)');
-    const handleMQ = (mq) => {
-      if (mq.matches) {
-        $(bodyTag).addClass('mq-sp');
-      } else {
-        $(bodyTag).removeClass('mq-sp');
-      }
-    };
-    winSize.addListener(handleMQ);
-    handleMQ(winSize);
+  // Modern syntax
+  if (winSize.addEventListener) {
+    winSize.addEventListener('change', handleMQ);
+  } else {
+    winSize.addListener(handleMQ); // レガシー対応
+  }
+  handleMQ(winSize);
 
-    const regexpSP = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-    if (regexpSP.test(navigator.userAgent)) {
-      $(bodyTag).addClass('ua-sp');
-    }
+  // SP UA判定
+  const regexpSP = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+  if (regexpSP.test(navigator.userAgent)) {
+    body.classList.add('ua-sp');
+  }
 
-    // target="_blank" rel属性付与
-    $('a[target="_blank"]').attr('rel', 'noopener noreferrer');
+  // target="_blank" に rel 属性を自動付与
+  document.querySelectorAll('a[target="_blank"]').forEach((a) => {
+    a.setAttribute('rel', 'noopener noreferrer');
   });
 }
