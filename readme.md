@@ -14,3 +14,5 @@
 - **スタイル:** SCSS (Sass)
 - **コード品質・規約:** ESLint, Stylelint, Prettier
 - **パッケージマネージャー:** pnpm
+- **CI/CD:** GitHub Actions（ビルド・デプロイ自動化）
+  - ※本リポジトリでは、公開範囲の都合によりWorkflowおよびデプロイ設定は非公開としています。
