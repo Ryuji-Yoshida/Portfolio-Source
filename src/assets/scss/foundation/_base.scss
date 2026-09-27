@@ -2,7 +2,7 @@
 /////////////////////////////////////
 //  Config
 /////////////////////////////////////
-@use "../setting/_index" as v;
+@use '../setting/_index' as v;
 /************************************
     base
 ************************************/
@@ -18,18 +18,19 @@ html {
     font-size: var(--font-size-pc);
   }
 }
-*,::after,::before{
-  box-sizing: inherit
+*,
+::after,
+::before {
+  box-sizing: inherit;
 }
 body {
-  background-color: rgba(var( --color-rgb-blue), .02);
+  background-color: rgba(var(--color-rgb-blue), 0.02);
   color: var(--color-text);
-  font-family: var( --font-family-note);
-  font-size: .24rem;
-  font-feature-settings: "palt";
+  font-family: var(--font-family-note);
+  font-size: 0.24rem;
+  font-feature-settings: 'palt';
   @include v.mq(land) {
-    font-size: min(.2rem, 20px);
-
+    font-size: min(0.2rem, 20px);
   }
   a {
     backface-visibility: hidden;
@@ -63,10 +64,10 @@ body {
     outline: none;
   }
   .wrapper {
-    letter-spacing: .005rem;
+    letter-spacing: 0.005rem;
     line-height: 1.8;
     @include v.mq(land) {
-      letter-spacing: min(.01rem, 1px);
+      letter-spacing: min(0.01rem, 1px);
     }
   }
 }
@@ -84,6 +85,6 @@ body {
   aside,
   article,
   section {
-     display: block;
+    display: block;
   }
 }

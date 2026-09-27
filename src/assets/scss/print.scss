@@ -34,7 +34,8 @@ html {
 }
 
 body {
-  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif !important;
+  font-family:
+    'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif !important;
   font-feature-settings: normal !important;
 }
 
@@ -57,7 +58,7 @@ svg {
 #CookiebotWidget,
 .global__nav-btn,
 .global__nav-list,
-[data-js-elem="floatmenu"] {
+[data-js-elem='floatmenu'] {
   display: none !important;
 }
 
@@ -241,8 +242,8 @@ svg {
 .hide-sp,
 .hide-tb,
 .hide-pc,
-[data-js-anime="sec"] [data-js-anime-sec="ttl"],
-[data-js-anime="sec"] [data-js-anime-sec="conts"],
+[data-js-anime='sec'] [data-js-anime-sec='ttl'],
+[data-js-anime='sec'] [data-js-anime-sec='conts'],
 html.is-init .footer--site,
 html.is-init .sec:not(.sec-fv) {
   display: revert !important;
@@ -251,7 +252,9 @@ html.is-init .sec:not(.sec-fv) {
   transform: none !important;
 }
 
-h1, h2, h3,
+h1,
+h2,
+h3,
 .page__ttl,
 .sec__ttl,
 .conts__ttl,

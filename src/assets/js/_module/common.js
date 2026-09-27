@@ -29,7 +29,8 @@ export default function common() {
 
         e.preventDefault();
         const href = triggerEl.getAttribute('href');
-        const target = (href === '#' || href === '') ? document.documentElement : document.querySelector(href);
+        const target =
+          href === '#' || href === '' ? document.documentElement : document.querySelector(href);
         if (!target) return;
 
         const pos = target.getBoundingClientRect().top + window.scrollY;
@@ -70,7 +71,8 @@ export default function common() {
 
     e.preventDefault();
     const href = anchorEl.getAttribute('href');
-    const target = (href === '#' || href === '') ? document.documentElement : document.querySelector(href);
+    const target =
+      href === '#' || href === '' ? document.documentElement : document.querySelector(href);
     if (!target) return;
 
     const position = target.getBoundingClientRect().top + window.scrollY;
@@ -85,7 +87,8 @@ export default function common() {
   // 追従メニュー（元の計算ロジックそのまますげ替え）
   window.addEventListener('scroll', () => {
     const documentHeight = document.documentElement.scrollHeight;
-    const scrollPosition = window.innerHeight + (window.scrollY || document.documentElement.scrollTop);
+    const scrollPosition =
+      window.innerHeight + (window.scrollY || document.documentElement.scrollTop);
     const footer = document.querySelector('.footer--site');
     const footerHeight = footer ? footer.offsetHeight : 0;
 

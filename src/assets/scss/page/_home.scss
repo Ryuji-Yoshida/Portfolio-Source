@@ -2,8 +2,8 @@
 /////////////////////////////////////
 //  Config
 /////////////////////////////////////
-@use "sass:math";
-@use "../setting/_index" as v;
+@use 'sass:math';
+@use '../setting/_index' as v;
 /************************************
   Home
 ************************************/
@@ -23,7 +23,7 @@
         width: 96vw;
       }
       @include v.mq(land) {
-        padding: min(2.4rem, 240px) min(.4rem, 40px);
+        padding: min(2.4rem, 240px) min(0.4rem, 40px);
         position: relative;
       }
     }
@@ -31,9 +31,9 @@
   // about
   &-about {
     .text {
-      margin-bottom: .2rem;
+      margin-bottom: 0.2rem;
       @include v.mq(land) {
-        margin-bottom: min(.2rem, 20px);
+        margin-bottom: min(0.2rem, 20px);
       }
     }
     .notes {
@@ -43,9 +43,9 @@
   // works
   &-works {
     .text {
-      margin-bottom: .4rem;
+      margin-bottom: 0.4rem;
       @include v.mq(land) {
-        margin-bottom: min(.4rem, 40px);
+        margin-bottom: min(0.4rem, 40px);
       }
     }
     .works {
@@ -58,13 +58,13 @@
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        padding: .2rem;
+        padding: 0.2rem;
         @include v.mq(land) {
-          padding: min(.2rem, 20px);
+          padding: min(0.2rem, 20px);
           width: 48%;
         }
         &-thumb {
-          border: 1px solid rgba(var(--color-rgb-gray), .3);
+          border: 1px solid rgba(var(--color-rgb-gray), 0.3);
           line-height: 0;
           width: 32%;
         }
@@ -72,20 +72,20 @@
           width: 64%;
           &-name {
             color: var(--color-text-primary);
-            font-size: .32rem;
+            font-size: 0.32rem;
             font-weight: 700;
             line-height: 1.2;
-            margin-bottom: .1rem;
+            margin-bottom: 0.1rem;
             @include v.mq(land) {
-              font-size: min(.28rem, 28px);
-              margin-bottom: min(.1rem, 10px);
+              font-size: min(0.28rem, 28px);
+              margin-bottom: min(0.1rem, 10px);
             }
           }
           &-pic {
-            font-size: .2rem;
+            font-size: 0.2rem;
             font-weight: 500;
             @include v.mq(land) {
-              font-size: min(.16rem, 16px);
+              font-size: min(0.16rem, 16px);
             }
           }
         }
@@ -95,12 +95,12 @@
   // service
   &-service {
     @include v.mq(sp) {
-      margin-bottom: .8rem;
+      margin-bottom: 0.8rem;
     }
     .table {
-      margin-bottom: .2rem;
+      margin-bottom: 0.2rem;
       @include v.mq(land) {
-        margin-bottom: min(.2rem, 20px);
+        margin-bottom: min(0.2rem, 20px);
       }
     }
   }
@@ -110,7 +110,7 @@
       display: none;
     }
     @include v.mq(land) {
-      margin-bottom: min(.8rem, 80px);
+      margin-bottom: min(0.8rem, 80px);
     }
     .sec__inner {
       @include v.mq(land) {
@@ -140,7 +140,7 @@
       }
       &-form {
         @include v.mq(sp) {
-          margin-bottom: .6rem;
+          margin-bottom: 0.6rem;
         }
       }
     }
@@ -151,9 +151,9 @@
       width: 60%;
       &--item {
         line-height: 0;
-        width: .8rem;
+        width: 0.8rem;
         @include v.mq(land) {
-          width: min(.56rem, 56px);
+          width: min(0.56rem, 56px);
         }
       }
     }
@@ -178,12 +178,12 @@
             background-position: center;
             background-repeat: no-repeat;
             background-size: contain;
-            content: "";
+            content: '';
             display: inline-block;
-            height: .6em;
-            margin-left: .4em;
+            height: 0.6em;
+            margin-left: 0.4em;
             vertical-align: middle;
-            width: .4em;
+            width: 0.4em;
           }
         }
       }

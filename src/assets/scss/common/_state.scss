@@ -2,7 +2,7 @@
 /////////////////////////////////////
 //	Config
 /////////////////////////////////////
-@use "../setting/_index" as v;
+@use '../setting/_index' as v;
 /************************************
   State
 ************************************/
@@ -23,12 +23,12 @@ html {
         }
       }
     }
-    [data-js-elem="floatmenu"] {
+    [data-js-elem='floatmenu'] {
       @include v.mq(sp) {
         transform: translateY(1.28rem);
       }
       @include v.mq(land) {
-        transform: translateX(min(.76rem, 76px));
+        transform: translateX(min(0.76rem, 76px));
       }
     }
     .footer--site,
@@ -67,37 +67,37 @@ html {
   }
   &.is-anime {
     .header--site {
-      transition: all .6s .8s;
+      transition: all 0.6s 0.8s;
       will-change: transform, opacity, width;
       &::after {
         @include v.mq(land) {
-          transition: all .6s .6s;
+          transition: all 0.6s 0.6s;
         }
       }
     }
     .page__ttl {
       &-logo {
         &::after {
-          transition: all .6s .4s;
+          transition: all 0.6s 0.4s;
           will-change: transform, opacity, width;
         }
       }
       &-name {
-        transition: all .6s .2s;
+        transition: all 0.6s 0.2s;
         will-change: transform, opacity, width;
       }
     }
-    [data-js-elem="floatmenu"] {
-      transition: all .6s .8s;
+    [data-js-elem='floatmenu'] {
+      transition: all 0.6s 0.8s;
       will-change: transform, opacity, width;
     }
   }
   &.is-visit {
-    [data-js-anime="sec"] {
-      [data-js-anime-sec="ttl"] {
+    [data-js-anime='sec'] {
+      [data-js-anime-sec='ttl'] {
         opacity: 1;
       }
-      [data-js-anime-sec="conts"] {
+      [data-js-anime-sec='conts'] {
         opacity: 1;
       }
     }
@@ -110,17 +110,17 @@ html {
   }
 }
 // 追従メニュー
-[data-js-elem="floatmenu"] {
+[data-js-elem='floatmenu'] {
   &.is-stop {
     @include v.mq(land) {
-      bottom: calc(min(.1rem, 10px) + 88px);
+      bottom: calc(min(0.1rem, 10px) + 88px);
     }
   }
 }
 // ヘッダー
-[data-js-elem="header"] {
+[data-js-elem='header'] {
   &::after {
-    transition: all .6s;
+    transition: all 0.6s;
     will-change: transform, opacity, width;
     @include v.mq(sp) {
       height: 4rem;
@@ -143,42 +143,42 @@ html {
         transform: scale(0);
         @include v.z-index(l-1);
       }
-      transition: all .6s;
+      transition: all 0.6s;
       will-change: transform, opacity, width;
       &__item {
         &::before,
         &::after {
-          transition: all .6s;
+          transition: all 0.6s;
         }
         &-label {
-          transition: all .2s;
+          transition: all 0.2s;
         }
       }
     }
     &-list {
-      transition: all .6s;
+      transition: all 0.6s;
       will-change: transform, opacity, width;
       @include v.mq(sp) {
         opacity: 0;
       }
     }
   }
-  & ~ [data-js-elem="floatmenu"] {
-    transition: all .6s;
+  & ~ [data-js-elem='floatmenu'] {
+    transition: all 0.6s;
     will-change: transform, opacity, width;
     .floatmenu {
       &__item {
         @include v.mq(sp) {
-          transition: all .6s;
+          transition: all 0.6s;
           will-change: transform, opacity, width;
         }
       }
     }
   }
-  [data-js-trigger="gnav"] {
+  [data-js-trigger='gnav'] {
     &::after {
       @include v.mq(land) {
-        transition: all .6s;
+        transition: all 0.6s;
         width: 0;
         will-change: transform, opacity, width;
       }
@@ -204,8 +204,8 @@ html {
       position: relative;
       &-btn {
         @include v.mq(sp) {
-          height: .6rem;
-          width: .6rem;
+          height: 0.6rem;
+          width: 0.6rem;
           @include v.z-index(l99);
         }
         &__item {
@@ -243,7 +243,7 @@ html {
         }
       }
     }
-    & ~ [data-js-elem="floatmenu"] {
+    & ~ [data-js-elem='floatmenu'] {
       @include v.mq(sp) {
         @include v.z-index(l99);
       }
@@ -311,30 +311,30 @@ html {
   }
 }
 // セクション
-[data-js-anime="sec"] {
-  [data-js-anime-sec="ttl"] {
+[data-js-anime='sec'] {
+  [data-js-anime-sec='ttl'] {
     opacity: 0;
     strong {
       color: var(--color-text);
-      transition: color .6s;
-      transition-delay: .6s;
+      transition: color 0.6s;
+      transition-delay: 0.6s;
       will-change: color;
     }
   }
-  [data-js-anime-sec="conts"] {
+  [data-js-anime-sec='conts'] {
     opacity: 0;
   }
   &.is-anime {
-    [data-js-anime-sec="ttl"] {
-      animation: flowing .6s ease-in forwards;
+    [data-js-anime-sec='ttl'] {
+      animation: flowing 0.6s ease-in forwards;
       will-change: filter, letter-spacing, transform, opacity, width;
       strong {
         color: var(--color-text-primary);
       }
     }
-    [data-js-anime-sec="conts"] {
-      animation: fadeIn .6s ease-in forwards;
-      animation-delay: .6s;
+    [data-js-anime-sec='conts'] {
+      animation: fadeIn 0.6s ease-in forwards;
+      animation-delay: 0.6s;
       will-change: transform, opacity, width;
     }
   }
@@ -372,7 +372,8 @@ html {
   50% {
     fill: transparent;
   }
-  70%, 100% {
+  70%,
+  100% {
     fill: #333;
   }
 }
